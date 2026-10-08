@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::prefix('/profile')->name('profile.')->group(function () {
     Route::get('/', function (Request $request) {
@@ -30,4 +30,6 @@ Route::prefix('/profile')->name('profile.')->group(function () {
         Route::get('/', [RegisterController::class, 'index'])->name('index');
         Route::post('/', [RegisterController::class, 'store'])->name('store');
     });
+
+    Route::delete('/logout', [LoginController::class, 'destroy'])->name('logout');
 });

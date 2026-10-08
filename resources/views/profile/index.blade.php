@@ -8,7 +8,16 @@
 </head>
 
 <body>
-    <h1>Админ панель</h1>
+    <header>
+        <h1>Профиль пользователя {{ $request->user()->name }}</h1>
+        <form action="{{ route('profile.logout') }}" method="post"></form>
+    </header>
+    <div class="page">
+        <h3>Страница @section('title')</h3>
+        <div class="container">
+            @section('content')
+        </div>
+    </div>
 </body>
 
 </html>
