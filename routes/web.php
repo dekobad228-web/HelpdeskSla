@@ -17,6 +17,8 @@ Route::prefix('/profile')->name('profile.')->group(function () {
 
     Route::prefix('/tickets')->name('tickets.')->group(function () {
         Route::get('/', [TicketsController::class, 'index'])->name('index');
+        Route::get('/create', [TicketsController::class, 'create'])->name('create');
+        Route::post('/store', [TicketsController::class, 'store'])->name('store');
     })->middleware('role:customer, agent, admin');
 
     Route::prefix('/login')->name('login.')->group(function () {
