@@ -1,3 +1,5 @@
+@extends('profile.index')
+
 @section('title', 'Создание заявки')
 
 @section('content')

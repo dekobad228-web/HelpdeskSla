@@ -15,7 +15,13 @@ class TicketsController extends Controller
         return view('profile.tickets.index', compact('tickets'));
     }
 
-    public function create()
+    public function create(Request $request)
+    {
+        $user = $request->user();
+        return view('profile.tickets.create', compact('user'));
+    }
+
+    public function store(Request $request)
     {
         
         return;
