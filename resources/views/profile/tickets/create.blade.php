@@ -5,23 +5,15 @@
 @section('content')
 <form action="{{ route('profile.tickets.store') }}" method="post">
     @csrf
-    @if($categories->isNotEmpty())
     <div class="categories">
         @foreach ($categories as $category)
         <label for="category-{{ $category->id }}" class="label-radio">
             <p class="">{{ $category->name}}</p>
-            <input id="category-{{ $category->id }}" type="radio" name="category" value="{{ $category->name }}"
-                autocomplete="name" @checked($categories->first()->isNotEmpty())>
+            <input id="category-{{ $category->id }}" type="radio" name="category_id" value="{{ $category->id }}"
+                autocomplete="name" @checked($loop->first)>
         </label>
         @endforeach
-        <label for="category-default" class="label-radio">
-            <p class="">Другое</p>
-            <input id="category-default" type="radio" name="category" value="default" autocomplete="name">
-        </label>
     </div>
-    <br>
-    <hr>
-    @endif
     <br>
     <hr>
     <br>

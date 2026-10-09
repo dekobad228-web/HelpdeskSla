@@ -29,6 +29,8 @@ class TicketEvent extends Model
     public $table = 'ticket_events';
 
     protected $fillable = [
+        'ticket_id',
+        'user_id',
         'type',
         'old_value',
         'new_value'

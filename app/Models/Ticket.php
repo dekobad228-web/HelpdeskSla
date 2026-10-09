@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Cases\{TicketStatus, TicketPriority};
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -35,10 +36,23 @@ class Ticket extends Model
 
     protected $fillable = [
         'number',
+        'customer_id',
+        'assignee_id',
+        'category_id',
         'subject',
         'body',
         'priority',
         'status'
+    ];
+
+    protected $casts = [
+        'status' => TicketStatus::class,
+        'proirity' => TicketPriority::class,
+        'first_response_at' => 'datetime',
+        'resolved_at' => 'datetime',
+        'first_response_due_at' => 'datetime',
+        'resolution_due_at' => 'datetime',
+        'sla_breached_at' => 'datetime'
     ];
 
     public function customer(): BelongsTo
@@ -48,6 +62,6 @@ class Ticket extends Model
 
     public function assignee(): BelongsTo
     {
-        return $this->belongs(User::class, 'assignee_id', 'id');
+        return $this->belongsTo(User::class, 'assignee_id', 'id');
     }
 }

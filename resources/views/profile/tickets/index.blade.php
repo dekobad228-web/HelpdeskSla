@@ -4,6 +4,8 @@
 
 @section('content')
     @foreach ($tickets as $ticket)
-        {{ dump($ticket) }}
+        <a href="{{ route('profile.tickets.show', ['id' => $ticket->id]) }}">
+            {{ $ticket->number }}
+        </a>
     @endforeach
 @endsection

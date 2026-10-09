@@ -19,7 +19,8 @@ Route::prefix('/profile')->name('profile.')->group(function () {
         Route::get('/', [TicketsController::class, 'index'])->name('index');
         Route::get('/create', [TicketsController::class, 'create'])->name('create');
         Route::post('/store', [TicketsController::class, 'store'])->name('store');
-    })->middleware('role:customer, agent, admin');
+        Route::get('/{id}', [TicketsController::class, 'show'])->name('show');
+    })->middleware(['auth', 'role:customer, agent, admin']);
 
     Route::prefix('/login')->name('login.')->group(function () {
         Route::get('/', [LoginController::class, 'index'])->name('index');
@@ -31,5 +32,5 @@ Route::prefix('/profile')->name('profile.')->group(function () {
         Route::post('/', [RegisterController::class, 'store'])->name('store');
     });
 
-    Route::delete('/logout', [LoginController::class, 'destroy'])->name('logout');
+    Route::delete('/logout', [LoginController::class, 'logout'])->name('logout');
 });
