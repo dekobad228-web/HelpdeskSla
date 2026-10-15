@@ -27,7 +27,7 @@ class RegisterController extends Controller
 
         try {
             User::create([
-                'role' => 'admin',
+                'role' => 'customer',
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'password' => $validated['password'],

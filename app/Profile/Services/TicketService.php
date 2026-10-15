@@ -39,16 +39,11 @@ class TicketService
         return $result;
     }
 
-    protected function createNumber(int $int, ?string $symbol = null, ?int $count = null)
+    protected function createNumber(int $int)
     {
-        $symbol = $symbol ? $symbol : "T";
-        $date = date('Y');
-        $count = $count ? $count : 6;
-        while ((string) strlen($int) < $count) {
-            $int = random_int(0, 9) . $int;
-        }
+        $int = str_pad($int, 6, "0", STR_PAD_LEFT);
 
-        $array = [$symbol, $date, $int];
+        $array = ["T", date('Y'), $int];
         return implode("-", $array);
     }
 }
