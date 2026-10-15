@@ -1,4 +1,4 @@
-<form action="{{ route('profile.register.store') }}" method="post">
+<form action="{{ route('register.store') }}" method="post">
     @csrf
     <label for="name">
         <span>Имя: </span>

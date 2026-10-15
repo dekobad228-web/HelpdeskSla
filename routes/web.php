@@ -21,16 +21,16 @@ Route::prefix('/profile')->name('profile.')->group(function () {
         Route::post('/store', [TicketsController::class, 'store'])->name('store');
         Route::get('/{id}', [TicketsController::class, 'show'])->name('show');
     })->middleware(['auth', 'role:customer, agent, admin']);
-
-    Route::prefix('/login')->name('login.')->group(function () {
-        Route::get('/', [LoginController::class, 'index'])->name('index');
-        Route::post('/', [LoginController::class, 'store'])->name('store');
-    });
-
-    Route::prefix('/register')->name('register.')->group(function () {
-        Route::get('/', [RegisterController::class, 'index'])->name('index');
-        Route::post('/', [RegisterController::class, 'store'])->name('store');
-    });
-
-    Route::delete('/logout', [LoginController::class, 'logout'])->name('logout');
 });
+
+Route::prefix('/login')->name('login.')->group(function () {
+    Route::get('/', [LoginController::class, 'index'])->name('index');
+    Route::post('/', [LoginController::class, 'store'])->name('store');
+});
+
+Route::prefix('/register')->name('register.')->group(function () {
+    Route::get('/', [RegisterController::class, 'index'])->name('index');
+    Route::post('/', [RegisterController::class, 'store'])->name('store');
+});
+
+Route::delete('/logout', [LoginController::class, 'logout'])->name('logout');

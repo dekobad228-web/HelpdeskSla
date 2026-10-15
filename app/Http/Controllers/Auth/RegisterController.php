@@ -18,7 +18,7 @@ class RegisterController extends Controller
             return redirect()->route('profile.index');
         }
 
-        return view('profile.auth.register');
+        return view('auth.register');
     }
 
     public function store(RegisterRequest $request)

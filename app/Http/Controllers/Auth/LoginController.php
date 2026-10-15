@@ -15,7 +15,7 @@ class LoginController extends Controller
             return redirect()->route('profile.index');
         }
 
-        return view('profile.auth.login');
+        return view('auth.login');
     }
 
     public function store(LoginRequest $request)
@@ -34,7 +34,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         if (!Auth::check()) {
-            return redirect()->route('profile.login.index');
+            return redirect()->route('login.index');
         }
 
         Auth::logout();
@@ -42,6 +42,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('profile.login.index');
+        return redirect()->route('login.index');
     }
 }
