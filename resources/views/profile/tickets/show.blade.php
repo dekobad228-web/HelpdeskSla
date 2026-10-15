@@ -1,4 +1,4 @@
-@extends('profile.index')
+@extends('welcome')
 
 @section('title', 'Заявка: ' . $ticket->number)
 
