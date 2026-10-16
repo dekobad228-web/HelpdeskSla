@@ -26,8 +26,6 @@ class TicketService
                 'resolution_due_at' => now()->addMinutes($category->sla_resolution_minutes),
             ]);
 
-            // $ticket->update(['number' => $this->createNumber($ticket->id)]);
-
             TicketEvent::create([
                 'ticket_id' => $ticket->id,
                 'user_id' => $user->id,

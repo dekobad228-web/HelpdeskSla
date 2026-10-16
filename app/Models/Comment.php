@@ -30,9 +30,13 @@ class Comment extends Model
     public $table = 'comments';
 
     protected $fillable = [
+        'ticket_id',
+        'user_id',
         'body',
         'is_internal'
     ];
+
+    protected $guarded = false;
 
     public function user(): BelongsTo
     {

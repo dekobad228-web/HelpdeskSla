@@ -32,7 +32,7 @@ class TicketsController extends Controller
 
     public function show(int $ticket_id)
     {
-        $ticket = Ticket::select('number', 'subject', 'body')->findOrFail($ticket_id);
+        $ticket = Ticket::select('id', 'number', 'subject', 'body')->findOrFail($ticket_id);
         return view('profile.tickets.show', compact('ticket'));
     }
 }

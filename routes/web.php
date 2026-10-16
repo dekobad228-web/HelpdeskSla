@@ -22,7 +22,7 @@ Route::prefix('/profile')->middleware('auth:web')->name('profile.')->group(funct
         Route::post('/store', [TicketsController::class, 'store'])->name('store');
         Route::prefix('/{id}')->group(function () {
             Route::get('/', [TicketsController::class, 'show'])->name('show');
-            Route::get('/chat', [ChatController::class, 'show'])->name('chat.index');
+            Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
             Route::post('/chat', [ChatController::class, 'store'])->name('chat.store');
         });
     })->middleware('role:customer, agent, admin');
