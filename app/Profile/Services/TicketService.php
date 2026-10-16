@@ -4,7 +4,7 @@ namespace App\Profile\Services;
 
 use App\Models\{Category, Ticket, TicketEvent, User};
 use App\Cases\{TicketStatus, TicketPriority};
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\{DB, Hash};
 
 class TicketService
 {
@@ -15,6 +15,7 @@ class TicketService
         $result = DB::transaction(function () use ($user, $data, $category) {
 
             $ticket = Ticket::create([
+                'number' => $this->createNumber(Ticket::latest()->value('id') ?? 0),
                 'customer_id' => $user->id,
                 'category_id' => $category->id,
                 'subject' => $data['subject'],
@@ -25,7 +26,7 @@ class TicketService
                 'resolution_due_at' => now()->addMinutes($category->sla_resolution_minutes),
             ]);
 
-            $ticket->update(['number' => $this->createNumber($ticket->id)]);
+            // $ticket->update(['number' => $this->createNumber($ticket->id)]);
 
             TicketEvent::create([
                 'ticket_id' => $ticket->id,
@@ -41,7 +42,7 @@ class TicketService
 
     protected function createNumber(int $int)
     {
-        $int = str_pad($int, 6, "0", STR_PAD_LEFT);
+        $int = str_pad(++$int, 6, "0", STR_PAD_LEFT);
 
         $array = ["T", date('Y'), $int];
         return implode("-", $array);

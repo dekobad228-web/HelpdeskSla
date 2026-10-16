@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use App\Models\Category;
+use App\Models\{Category, User};
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,6 +16,27 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+
+        User::factory()->create([
+            'role' => 'admin',
+            'name' => 'Deko',
+            'email' => 'deko.bad228@gmail.com',
+            'password' => '12345678'
+        ]);
+
+        User::factory()->create([
+            'role' =>  'agent',
+            'name' => 'Stasik',
+            'email' => 'stasik@gmail.com',
+            'password' => '12345678'
+        ]);
+
+        User::factory()->create([
+            'role' =>  'customer',
+            'name' => 'Vadim',
+            'email' => 'vadim@gmail.com',
+            'password' => '12345678'
+        ]);
 
         Category::factory()->create([
             'name' => 'default',

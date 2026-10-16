@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Override;
 
 class TicketCreateRequest extends FormRequest
 {
@@ -38,6 +39,21 @@ class TicketCreateRequest extends FormRequest
                 'integer',
                 'exists:categories,id'
             ]
+        ];
+    }
+
+    #[Override]
+    public function messages()
+    {
+        return [
+            'subject.required' => 'Задайте тему заявки',
+            'subject.string' => 'Неверный формат темы',
+            'subject.max' => 'Превышено максимальное количество символов',
+            'body.required' => 'Заполните письмо',
+            'body.string' => 'Неверный формат письма',
+            'body.max' => 'Превышено максимальное количество символов',
+            'category_id.required' => 'Выберите категорию',
+            'category_id.exists' => 'Такой категории не существует'
         ];
     }
 }

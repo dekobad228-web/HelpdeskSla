@@ -14,7 +14,7 @@ class TicketsController extends Controller
 
     public function index()
     {
-        $tickets = Ticket::where('customer_id', Auth::id())->get();
+        $tickets = Ticket::where('customer_id', Auth::id())->orderBy('id', 'desc')->get();
         return view('profile.tickets.index', compact('tickets'));
     }
 
@@ -30,9 +30,9 @@ class TicketsController extends Controller
         return redirect()->route('profile.tickets.index');
     }
 
-    public function show(int $id)
+    public function show(int $ticket_id)
     {
-        $ticket = Ticket::findOrFail($id);
+        $ticket = Ticket::select('number', 'subject', 'body')->findOrFail($ticket_id);
         return view('profile.tickets.show', compact('ticket'));
     }
 }
