@@ -26,7 +26,7 @@ class TicketsController extends Controller
 
     public function store(TicketCreateRequest $request)
     {
-        $result = $this->service->createTicket($request->user(), $request->validated());
+        $this->service->createTicket($request->user(), $request->validated());
         return redirect()->route('profile.tickets.index');
     }
 
