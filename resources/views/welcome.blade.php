@@ -48,17 +48,23 @@
                         class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100 hover:text-blue-600">
                         Личный кабинет
                     </a>
+                    @if (Auth::user()->role === 'agent')
+                        <a href="{{ route('profile.jobs.index') }}"
+                            class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100 hover:text-blue-600">
+                            Все заявки
+                        </a>
+                    @endif
 
-                    <a href="{{ route('profile.tickets.index') }}"
-                        class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100 hover:text-blue-600">
-                        Заявки
-                    </a>
-
-                    <a href="{{ route('profile.tickets.create') }}"
-                        class="rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                        Создать заявку
-                    </a>
-
+                    @if (in_array(Auth::user()->role, ['customer', 'admin'], true))
+                        <a href="{{ route('profile.tickets.index') }}"
+                            class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100 hover:text-blue-600">
+                            Мои заявки
+                        </a>
+                        <a href="{{ route('profile.tickets.create') }}"
+                            class="rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Создать заявку
+                        </a>
+                    @endif
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         @method('DELETE')

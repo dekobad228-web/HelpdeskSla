@@ -14,7 +14,7 @@ class ChatController extends Controller
         $comments = Comment::where('ticket_id', $ticket_id)->get();
         $ticket = Ticket::findOrFail($ticket_id);
 
-        return view('profile.tickets.chat', compact('comments', 'ticket'));
+        return view('profile.customer.tickets.chat', compact('comments', 'ticket'));
     }
 
     public function store(Request $request, int $ticket_id)

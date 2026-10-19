@@ -15,13 +15,13 @@ class TicketsController extends Controller
     public function index()
     {
         $tickets = Ticket::where('customer_id', Auth::id())->orderBy('id', 'desc')->get();
-        return view('profile.tickets.index', compact('tickets'));
+        return view('profile.customer.tickets.index', compact('tickets'));
     }
 
     public function create()
     {
         $categories = Category::select('id', 'name')->get();
-        return view('profile.tickets.create', compact('categories'));
+        return view('profile.customer.tickets.create', compact('categories'));
     }
 
     public function store(TicketCreateRequest $request)
@@ -33,6 +33,6 @@ class TicketsController extends Controller
     public function show(int $ticket_id)
     {
         $ticket = Ticket::select('id', 'number', 'subject', 'body')->findOrFail($ticket_id);
-        return view('profile.tickets.show', compact('ticket'));
+        return view('profile.customer.tickets.show', compact('ticket'));
     }
 }

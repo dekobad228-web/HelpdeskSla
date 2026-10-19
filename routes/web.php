@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\ChatController;
+use App\Http\Controllers\Auth\{RegisterController, LoginController};
+use App\Http\Controllers\{JobController, ChatController, TicketsInWork};
 use App\Http\Controllers\Profile\TicketsController;
 use Illuminate\Http\Request;
 
@@ -25,7 +24,17 @@ Route::prefix('/profile')->middleware('auth:web')->name('profile.')->group(funct
             Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
             Route::post('/chat', [ChatController::class, 'store'])->name('chat.store');
         });
-    })->middleware('role:customer, agent, admin');
+    })->middleware('role:customer,admin');
+
+    Route::prefix('/jobs')->name('jobs.')->group(function () {
+        Route::get('/', [JobController::class, 'index'])->name('index');
+        Route::post('/{id}', [JobController::class, 'store'])->name('store');
+        Route::get('/{id}', [JobController::class, 'show'])->name('show');
+    })->middleware('role:agent, admin');
+
+    Route::prefix('/tickets-in-work')->name('tickets-work.')->group(function () {
+        Route::get('/', [TicketsInWork::class, 'index'])->name('index');
+    });
 });
 
 Route::prefix('/login')->name('login.')->group(function () {
